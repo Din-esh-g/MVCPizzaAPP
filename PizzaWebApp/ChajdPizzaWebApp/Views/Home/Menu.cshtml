@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Menu";
+}
+
+    <head>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                contentType: 'application/json',
+                type: "GET",
+                url: "/api/PizzaTypesApi/Special",
+
+                    success: function (data) {
+                        if (data.length > 0) {       
+                        $.each(data, function () {
+                            var li = '<figure ><img src="/image/special' + this.id + '.jpg" alt="Second Slide" style="height:133px;width:315px; text-align:center"><h4 style="text-emphasis-color:blueviolet"><b>' + this.name + '</b></br> Price: $' + this.price + '</h4><figcaption><p>' + this.description + '</p><a class="btn btn-lg animated-button victoria-one" href="/SpecialtyPizza/Order/' + this.id + '">Order Now</a></figcaption></figure><hr/>';
+                            $('#specialtyPizzas').append(li);
+                        });
+                    }
+                },
+                    error: function (data) {
+                    alert("fail");
+                    failure(data);
+                }
+            });
+
+
+            });
+
+
+
+        </script>
+
+    </head>
+
+
+
+    
+<h3 style="text-align:center"><b> Our Menu </b></h3>
+<div>
+    
+    <a class="btn btn-lg animated-button victoria-one" asp-action="CustomPizza">Build you own</a>
+</div>
+<br />
+<div>
+    <h2 style="text-align:center">SPECIALTY PIZZAS</h2>
+    <div class="container">
+
+            <div class="row">
+                <div  id="specialtyPizzas">
+                </div>
+            </div>
+        
+        </div>
+    <br />
+    <br />
+    </div>
